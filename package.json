@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.37.3",
+    "@clerk/themes": "^2.4.51",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.95.3",
     "@tabler/icons-react": "^3.36.1",
