@@ -5,7 +5,7 @@ import ModeToggle from "./ModeToggle"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { Separator } from "@/components/ui/separator"
 
-import { useRouteSegment } from "@/hooks/useRouteSegment"
+import { useRouteSegment } from "@/hooks"
 
 import { deSlufigy } from "@/utils"
 
@@ -15,7 +15,8 @@ interface HeaderProps {
 
 const Header = ({ notFound }: HeaderProps) => {
     const segment = useRouteSegment();
-    const title = deSlufigy(segment);
+    let title = deSlufigy(segment);
+    if (title === '/') title = 'Home';
     
     return (
         <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
