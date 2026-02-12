@@ -6,6 +6,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    useSidebar,
 } from "@/components/ui/sidebar"
 
 import { useRouteSegment } from "@/hooks"
@@ -22,16 +23,20 @@ const MainSidebarGroup = ({
     }[]
 }) => {
     const segment = useRouteSegment();
-    
+    const { setOpenMobile } = useSidebar();
+
     return (
         <SidebarGroup>
             <SidebarGroupContent className="flex flex-col gap-2">
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <Link href={item.url}>
-                                <SidebarMenuButton 
-                                    tooltip={item.title} 
+                            <Link
+                                href={item.url}
+                                onClick={() => setOpenMobile(false)}
+                            >
+                                <SidebarMenuButton
+                                    tooltip={item.title}
                                     isActive={item.url.slice(1) === segment}
                                 >
                                     {<item.icon />}

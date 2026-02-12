@@ -8,6 +8,7 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    useSidebar,
 } from "@/components/ui/sidebar"
 
 import { useRouteSegment } from "@/hooks"
@@ -26,17 +27,22 @@ const SecondarySidebarGroup = ({
 } & ComponentPropsWithoutRef<typeof SidebarGroup>) => {
     const segment = useRouteSegment();
 
+    const { setOpenMobile } = useSidebar();
+
     return (
         <SidebarGroup {...props}>
             <SidebarGroupContent>
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <SidebarMenuButton 
+                            <SidebarMenuButton
                                 isActive={item.url.slice(1) === segment}
                                 asChild
                             >
-                                <Link href={item.url}>
+                                <Link
+                                    href={item.url}
+                                    onClick={() => setOpenMobile(false)}
+                                >
                                     <item.icon />
                                     <span>{item.title}</span>
                                 </Link>

@@ -1,6 +1,6 @@
-import { SignOutButton } from "@clerk/nextjs"
+import Link from "next/link"
 
-import AvatarWithUserInfo from "./AvatarWithUserInfo"
+import { SignOutButton } from "@clerk/nextjs"
 
 import {
     DropdownMenu,
@@ -17,23 +17,23 @@ import {
     useSidebar,
 } from "@/components/ui/sidebar"
 
+import AvatarWithUserInfo from "./AvatarWithUserInfo"
+
 import {
     IconDotsVertical,
     IconLogout,
 } from "@tabler/icons-react"
 
 interface SidebarUserProps {
-    username: string;
     email: string;
     imageUrl: string;
 }
 
 const SidebarUser = ({
-    username,
     email,
     imageUrl
 }: SidebarUserProps) => {
-    const { isMobile } = useSidebar();
+    const { isMobile, setOpenMobile } = useSidebar();
 
     return (
         <SidebarMenu>
@@ -47,7 +47,6 @@ const SidebarUser = ({
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                         >
                             <AvatarWithUserInfo
-                                username={username}
                                 email={email}
                                 imageUrl={imageUrl}
                             />
@@ -64,20 +63,26 @@ const SidebarUser = ({
                         sideOffset={4}
                     >
                         <DropdownMenuLabel className="p-0 font-normal">
-                            <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                <AvatarWithUserInfo
-                                    username={username}
-                                    email={email}
-                                    imageUrl={imageUrl}
-                                />
-                            </div>
+                            <Link
+                                href="/profile"
+                                onClick={() => setOpenMobile(false)}
+                            >
+                                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                                    <AvatarWithUserInfo
+                                        email={email}
+                                        imageUrl={imageUrl}
+                                    />
+                                </div>
+                            </Link>
                         </DropdownMenuLabel>
 
                         <DropdownMenuSeparator />
 
                         {/* Logout Button */}
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setOpenMobile(false)}>
                             <IconLogout />
+
+                            {/* TODO: Since SignOutButton's width is not full, a user can't click on the extreme left or right side of the dropdown item to sign out. */}
                             <SignOutButton />
                         </DropdownMenuItem>
                     </DropdownMenuContent>

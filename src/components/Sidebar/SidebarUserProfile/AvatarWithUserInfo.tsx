@@ -4,14 +4,14 @@ import {
     AvatarFallback
 } from '@/components/ui/avatar'
 
+import { getRollNumberFromEmail } from '@/utils';
+
 interface AvatarWithUserInfoProps {
-    username: string;
     email: string;
     imageUrl: string;
 }
 
 const AvatarWithUserInfo = ({ 
-    username, 
     email,
     imageUrl
 }: AvatarWithUserInfoProps) => {
@@ -21,10 +21,10 @@ const AvatarWithUserInfo = ({
             <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage
                     src={imageUrl}
-                    alt={username}
+                    alt={getRollNumberFromEmail(email)}
                 />
                 <AvatarFallback className="rounded-lg">
-					User profile
+					{getRollNumberFromEmail(email)}
                 </AvatarFallback>
             </Avatar>
 

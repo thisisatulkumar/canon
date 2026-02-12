@@ -2,9 +2,9 @@
 
 import Link from "next/link"
 
-import { 
+import {
     useUser,
-    SignInButton 
+    SignInButton
 } from "@clerk/nextjs"
 
 import {
@@ -15,32 +15,53 @@ import {
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
+    useSidebar,
 } from "@/components/ui/sidebar"
 import { Button } from "@/components/ui/button"
 
-import {
-    IconHome,
-} from "@tabler/icons-react"
+import MainSidebarGroup from "./SidebarGroups/MainSidebarGroup"
+import SecondarySidebarGroup from "./SidebarGroups/SecondarySidebarGroup"
+import SidebarUser from "./SidebarUserProfile/SidebarUser"
+import Loading from "./SidebarUserProfile/Loading"
 
-import MainSidebarGroup from "./MainSidebarGroup"
-import SecondarySidebarGroup from "./SecondarySidebarGroup"
-import SidebarUser from "./SidebarUser"
-import Loading from "./Loading"
+import {
+    IconStar,
+    IconBell,
+    IconSearch,
+    IconTrophy
+} from "@tabler/icons-react"
 
 const links = {
     mainLinks: [
         {
-            title: "Home",
+            title: "Leaderboard",
             url: "/",
-            icon: IconHome,
+            icon: IconTrophy,
         },
+        {
+            title: "The Arena",
+            url: "/arena",
+            icon: IconStar,
+        },
+        {
+            title: "Notifications",
+            url: "/notifications",
+            icon: IconBell,
+        }
     ],
     secondaryLinks: [
+        {
+            title: "How it Works?",
+            url: "/how-it-works",
+            icon: IconSearch,
+        }
     ],
 }
 
 const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
     const { isSignedIn, user, isLoaded } = useUser();
+
+    const { setOpenMobile } = useSidebar();
 
     return (
         <Sidebar
@@ -55,8 +76,13 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                             asChild
                             className="data-[slot=sidebar-menu-button]:p-1.5!"
                         >
-                            <Link href="/">
-                                <span className="text-base font-semibold">Canon</span>
+                            <Link
+                                href="/"
+                                onClick={() => setOpenMobile(false)}
+                            >
+                                <span className="text-base font-semibold">
+                                    Canon
+                                </span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -66,9 +92,10 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
             {/* Sidebar Content */}
             <SidebarContent>
                 <MainSidebarGroup items={links.mainLinks} />
-                <SecondarySidebarGroup 
-                    items={links.secondaryLinks} 
-                    className="mt-auto" 
+
+                <SecondarySidebarGroup
+                    items={links.secondaryLinks}
+                    className="mt-auto"
                 />
             </SidebarContent>
 
@@ -78,7 +105,6 @@ const AppSidebar = ({ ...props }: React.ComponentProps<typeof Sidebar>) => {
                     isLoaded ? (
                         isSignedIn ? (
                             <SidebarUser
-                                username={user.username ?? ""}
                                 email={user.primaryEmailAddress?.toString() ?? ""}
                                 imageUrl={user.imageUrl ?? ""}
                             />
