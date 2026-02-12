@@ -22,7 +22,7 @@ const InvalidRollNumberDialog = ({ open, onConfirm }: InvalidRollNumberDialogPro
                     <AlertDialogTitle>Invalid Email Address</AlertDialogTitle>
 
                     <AlertDialogDescription>
-                        Please use your college email address to sign in. Also, ensure you are a first year student.
+                        Please use your <span className="font-bold">college email address</span> to sign in. Also, ensure you are a <span className="font-bold">first year student</span>.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
 
