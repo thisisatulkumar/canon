@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useUser, useClerk } from "@clerk/nextjs";
 
-import InvalidRollNumberDialog from "@/components/InvalidRollNumberDialog";
+import InvalidRollNumberDialog from "@/components/SyncClerkWithSupabase/InvalidRollNumberDialog";
 
 import { supabase } from "@/lib/supabase";
 
