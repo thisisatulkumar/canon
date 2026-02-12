@@ -231,7 +231,7 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
                 {/* Selection Panel */}
                 <aside className="w-full lg:w-[30%]">
-                    <div className="mt-6 p-6">
+                    <div className="sticky top-20 p-6">
                         {hasVoted ? (
                             <Card className="border-2 border-primary/20 shadow-lg bg-primary/5">
                                 <CardContent className="p-8 text-center flex flex-col items-center gap-4">
