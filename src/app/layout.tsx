@@ -59,7 +59,7 @@ export default function RootLayout({
                             }
                         >
                             <AppSidebar variant="inset" />
-                            
+
                             <IntroDialog />
 
                             <SidebarInset>
