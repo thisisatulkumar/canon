@@ -2,6 +2,8 @@ import { Metadata } from "next";
 
 import { CSSProperties } from "react";
 
+import { Analytics } from "@vercel/analytics/next"
+
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { ThemeProvider } from "@/lib/theme";
@@ -75,6 +77,8 @@ export default function RootLayout({
                             </SidebarInset>
                         </SidebarProvider>
                     </ThemeProvider>
+
+                    <Analytics />
                 </body>
             </html>
         </ClerkProvider>
