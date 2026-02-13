@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState, useEffect } from "react"
+import { use, useState, useEffect, useRef } from "react"
 
 import { notFound } from "next/navigation"
 
@@ -25,7 +25,7 @@ import VotingSuccessfulDialog from "@/components/Arena/VotingSuccessfulDialog"
 
 import { hasUserVoted, castVotes, getCategoryBySlug } from "@/services"
 
-import { useStudents } from "@/hooks/useStudents"
+import { useStudents, useIsMobile } from "@/hooks"
 
 import { deSlufigy, groupStudentsByBranch, getBranchLabel, formatStudentName, getRollNumberFromEmail } from "@/utils"
 
@@ -33,7 +33,7 @@ import { BRANCHES } from "@/lib/constants"
 
 import type { Student, Category } from "@/types"
 
-import { X, User, Trophy, Loader2, Bell } from "lucide-react"
+import { X, User, Trophy, Loader2, Bell, ChevronDown } from "lucide-react"
 
 const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }) => {
     const { category, sex: sexParam } = use(params);
@@ -50,7 +50,30 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
     const sex = sexParam === 'boys' ? 'm' : 'f';
 
+    const isMobile = useIsMobile();
+    const selectionPanelRef = useRef<HTMLDivElement>(null);
+    const [isPanelVisible, setIsPanelVisible] = useState(true);
+
     const { students, isLoading: isStudentsLoading, error, refetch } = useStudents(sex);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsPanelVisible(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
+
+        if (selectionPanelRef.current) {
+            observer.observe(selectionPanelRef.current);
+        }
+
+        return () => {
+            if (selectionPanelRef.current) {
+                observer.unobserve(selectionPanelRef.current);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         const init = async () => {
@@ -237,7 +260,10 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
                 {/* Selection Panel */}
                 <aside className="w-full lg:w-[30%]">
-                    <div className="sticky top-20 p-6">
+                    <div
+                        ref={selectionPanelRef}
+                        className="sticky top-20 p-6"
+                    >
                         {!isSignedIn ? (
                             <Card className="border-2 border-dashed border-muted shadow-lg">
                                 <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
@@ -367,6 +393,21 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
                 setShowSuccessDialog={setShowSuccessDialog}
                 nextUpdateTime={nextUpdateTime}
             />
+
+            {isMobile && !isPanelVisible && selectedStudents.length > 0 && !hasVoted && (
+                <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                    <Button
+                        onClick={() => selectionPanelRef.current?.scrollIntoView({ behavior: 'smooth' })}
+                        className="rounded-full px-6 py-3 shadow-2xl bg-primary text-primary-foreground flex items-center gap-3 font-bold border-2 border-primary-foreground/20 hover:scale-[1.05] active:scale-[0.95] transition-all"
+                    >
+                        <div className="flex flex-col items-start leading-none">
+                            <span className="text-lg font-black">{selectedStudents.length} / 3</span>
+                        </div>
+
+                        <ChevronDown className="size-5 animate-bounce mt-1" />
+                    </Button>
+                </div>
+            )}
         </div>
     )
 }
