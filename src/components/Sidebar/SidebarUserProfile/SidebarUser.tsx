@@ -63,17 +63,12 @@ const SidebarUser = ({
                         sideOffset={4}
                     >
                         <DropdownMenuLabel className="p-0 font-normal">
-                            <Link
-                                href="/profile"
-                                onClick={() => setOpenMobile(false)}
-                            >
-                                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                    <AvatarWithUserInfo
-                                        email={email}
-                                        imageUrl={imageUrl}
-                                    />
-                                </div>
-                            </Link>
+                            <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                                <AvatarWithUserInfo
+                                    email={email}
+                                    imageUrl={imageUrl}
+                                />
+                            </div>
                         </DropdownMenuLabel>
 
                         <DropdownMenuSeparator />
