@@ -19,6 +19,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 
 import AppSidebar from "@/components/Sidebar/AppSidebar";
+import IntroDialog from "@/components/Intro/IntroDialog";
 
 import "./globals.css";
 
@@ -58,6 +59,8 @@ export default function RootLayout({
                             }
                         >
                             <AppSidebar variant="inset" />
+                            
+                            <IntroDialog />
 
                             <SidebarInset>
                                 {/* 
