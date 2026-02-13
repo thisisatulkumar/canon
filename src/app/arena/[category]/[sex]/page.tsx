@@ -179,7 +179,9 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
                                         >
                                             <AccordionTrigger className="hover:no-underline">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="text-lg font-semibold">{branch.label}</span>
+                                                    <span className="text-lg font-semibold">
+                                                        {branch.label}
+                                                    </span>
 
                                                     <Badge
                                                         variant="secondary"
@@ -191,27 +193,26 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
                                             </AccordionTrigger>
 
                                             <AccordionContent>
-                                                <div className="grid grid-cols-1 gap-3 py-4 sm:grid-cols-2 lg:grid-cols-4">
+                                                <div className="sm:grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                                                     {branchStudents.map((student) => {
                                                         const isSelected = selectedStudents.some(s => s.roll_number === student.roll_number);
+
                                                         return (
                                                             <div
                                                                 key={student.roll_number}
                                                                 onClick={() => toggleStudent(student)}
                                                                 className={cn(
-                                                                    "group relative cursor-pointer overflow-hidden rounded-md border-2 px-4 py-3 transition-all duration-300 hover:shadow-md",
+                                                                    "group w-auto inline-block mr-2 mb-1 sm:block relative cursor-pointer overflow-hidden rounded-md border-2 px-4 py-2 transition-all duration-300 hover:shadow-md",
                                                                     isSelected
                                                                         ? "border-primary bg-primary/5 shadow-inner"
                                                                         : "bg-card border-transparent hover:border-muted-foreground/20",
                                                                     hasVoted && "cursor-default opacity-80"
                                                                 )}
                                                             >
-                                                                <div className="flex items-center gap-3">
-                                                                    <div className="flex flex-col truncate">
-                                                                        <span className="truncate font-medium group-hover:text-primary transition-colors">
-                                                                            {formatStudentName(student.name)}
-                                                                        </span>
-                                                                    </div>
+                                                                <div className="truncate">
+                                                                    <span className="truncate font-medium group-hover:text-primary transition-colors">
+                                                                        {formatStudentName(student.name)}
+                                                                    </span>
                                                                 </div>
                                                             </div>
                                                         );
@@ -224,7 +225,9 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
                                 {students.length === 0 && (
                                     <div className="py-20 text-center">
-                                        <p className="text-muted-foreground">No students found for this search.</p>
+                                        <p className="text-muted-foreground">
+                                            No students found for this search.
+                                        </p>
                                     </div>
                                 )}
                             </Accordion>
