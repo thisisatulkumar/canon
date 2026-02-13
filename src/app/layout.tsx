@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { CSSProperties } from "react";
 
 import { ClerkProvider } from "@clerk/nextjs";
@@ -6,16 +8,22 @@ import { ThemeProvider } from "@/lib/theme";
 
 import { shadcn } from "@clerk/themes";
 
-import SyncClerkWithSupabase from "@/components/SyncClerkWithSupabase";
+import SyncClerkWithSupabase from "@/components/SyncClerkWithSupabase/SyncClerkWithSupabase";
 
 import {
     SidebarProvider,
     SidebarInset
 } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/sonner";
 
 import AppSidebar from "@/components/Sidebar/AppSidebar";
 
 import "./globals.css";
+
+export const metadata: Metadata = {
+    title: "Canon",
+    description: "Canon"
+};
 
 export default function RootLayout({
     children,
@@ -33,6 +41,11 @@ export default function RootLayout({
                         disableTransitionOnChange
                     >
                         <SyncClerkWithSupabase />
+
+                        <Toaster
+                            position="top-right"
+                            richColors
+                        />
 
                         <SidebarProvider
                             style={
