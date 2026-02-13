@@ -28,8 +28,15 @@ import {
     IconStar,
     IconBell,
     IconSearch,
-    IconTrophy
+    IconTrophy,
+    IconBrandWhatsapp
 } from "@tabler/icons-react"
+
+const whatsAppMessage =
+    "👀 You might be on this list.\n\n" +
+    "Anonymous college rankings just dropped.\n\n" +
+    "See for yourself 👇\n" +
+    "https://thecanon.vercel.app";
 
 const links = {
     mainLinks: [
@@ -50,6 +57,11 @@ const links = {
         }
     ],
     secondaryLinks: [
+        {
+            title: "Share on WhatsApp",
+            url: `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMessage)}`,
+            icon: IconBrandWhatsapp
+        },
         {
             title: "How it Works?",
             url: "/how-it-works",

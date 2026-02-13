@@ -27,7 +27,7 @@ const LeaderboardRefreshCountdown = () => {
     }, []);
 
     return (
-        <div className="w-full lg:w-[30%] space-y-6">
+        <div className="w-full space-y-6">
             <Card className="overflow-hidden border-none shadow-premium bg-linear-to-br from-primary/10 via-background to-background">
                 <CardHeader className="pb-2">
                     <CardTitle className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-muted-foreground">
