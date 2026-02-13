@@ -29,12 +29,17 @@ export const timeAgo = (input: string | Date): string => {
 
 export const timeLeft = (): string => {
     const now = new Date();
-    const nextHour = new Date(now);
-    nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+    const startOfDay = new Date(now);
+    startOfDay.setHours(0, 0, 0, 0);
 
-    const diff = nextHour.getTime() - now.getTime();
-    const minutes = Math.floor((diff / 1000 / 60) % 60);
-    const seconds = Math.floor((diff / 1000) % 60);
+    const msSinceStart = now.getTime() - startOfDay.getTime();
+    const intervalMs = 20 * 60 * 1000;
+    const nextIntervalMs = Math.ceil((msSinceStart + 1) / intervalMs) * intervalMs;
+    const nextInterval = new Date(startOfDay.getTime() + nextIntervalMs);
 
-    return `${minutes}m ${seconds}s`;
+    const diff = nextInterval.getTime() - now.getTime();
+    const remainingMinutes = Math.floor((diff / 1000 / 60) % 60);
+    const remainingSeconds = Math.floor((diff / 1000) % 60);
+
+    return `${remainingMinutes}m ${remainingSeconds}s`;
 };

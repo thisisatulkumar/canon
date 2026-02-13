@@ -41,7 +41,7 @@ const LeaderboardRefreshCountdown = () => {
                         {timeLeft}
                     </div>
                     <p className="text-[10px] text-muted-foreground mt-2 uppercase font-bold">
-                        Leaderboard refreshes every hour
+                        Leaderboard refreshes every 20 minutes
                     </p>
                 </CardContent>
             </Card>

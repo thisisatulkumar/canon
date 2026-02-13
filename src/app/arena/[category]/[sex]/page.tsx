@@ -104,11 +104,16 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
     const calculateNextUpdateTime = () => {
         const now = new Date();
-        const nextHour = new Date(now);
-        nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+        const startOfDay = new Date(now);
+        startOfDay.setHours(0, 0, 0, 0);
 
-        return nextHour.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
-    };
+        const msSinceStart = now.getTime() - startOfDay.getTime();
+        const intervalMs = 20 * 60 * 1000;
+        const nextIntervalMs = Math.ceil((msSinceStart + 1) / intervalMs) * intervalMs;
+        const nextInterval = new Date(startOfDay.getTime() + nextIntervalMs);
+
+        return nextInterval.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+    }
 
     const handleCastVote = async () => {
         if (!isSignedIn || !user || !categoryData || selectedStudents.length !== 3) return;
@@ -134,7 +139,7 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
             alert(castError || "Failed to cast vote. Please try again.");
         }
         setIsCasting(false);
-    };
+    }
 
     const isLoading = isStudentsLoading || isCheckingVote;
 
