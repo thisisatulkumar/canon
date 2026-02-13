@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { useState, useEffect } from "react"
 
 import {
@@ -13,7 +15,7 @@ import {
 
 import { Button } from "@/components/ui/button"
 
-import { Trophy, Flame, TrendingUp, Sparkles } from "lucide-react"
+import { Trophy, Flame, TrendingUp } from "lucide-react"
 
 const IntroDialog = () => {
     const [open, setOpen] = useState(false)
@@ -41,7 +43,12 @@ const IntroDialog = () => {
             >
                 <DialogHeader className="flex flex-col items-center text-center">
                     <div className="rounded-full bg-primary/10 p-3 mb-2">
-                        <Sparkles className="size-8 text-primary" />
+                        <Image
+                            src="/icon.png"
+                            width={20}
+                            height={20}
+                            alt="Canon"
+                        />
                     </div>
 
                     <DialogTitle className="text-2xl font-black uppercase tracking-tighter italic">
