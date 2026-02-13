@@ -2,9 +2,9 @@
 
 import { use, useState, useEffect } from "react"
 
-import { notFound, useRouter } from "next/navigation"
+import { notFound } from "next/navigation"
 
-import { useUser } from "@clerk/nextjs"
+import { useUser, SignInButton } from "@clerk/nextjs"
 
 import {
     Accordion,
@@ -33,14 +33,12 @@ import { BRANCHES } from "@/lib/constants"
 
 import type { Student, Category } from "@/types"
 
-import { X, User, Trophy, Loader2 } from "lucide-react"
+import { X, User, Trophy, Loader2, Bell } from "lucide-react"
 
 const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }) => {
     const { category, sex: sexParam } = use(params);
 
     const { user, isLoaded: isUserLoaded, isSignedIn } = useUser();
-
-    const router = useRouter();
 
     const [selectedStudents, setSelectedStudents] = useState<Student[]>([]);
     const [hasVoted, setHasVoted] = useState(false);
@@ -232,7 +230,29 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
                 {/* Selection Panel */}
                 <aside className="w-full lg:w-[30%]">
                     <div className="sticky top-20 p-6">
-                        {hasVoted ? (
+                        {!isSignedIn ? (
+                            <Card className="border-2 border-dashed border-muted shadow-lg">
+                                <CardContent className="flex flex-col items-center justify-center gap-4 py-12 text-center">
+                                    <div className="rounded-full bg-muted p-3">
+                                        <Bell className="size-8 text-muted-foreground opacity-50" />
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <h2 className="text-xl font-bold">Please log in</h2>
+
+                                        <p className="text-sm text-muted-foreground">
+                                            You need to be logged in to cast your votes.
+                                        </p>
+                                    </div>
+
+                                    <SignInButton mode="modal">
+                                        <Button className="mt-2 w-full">
+                                            Login to Vote
+                                        </Button>
+                                    </SignInButton>
+                                </CardContent>
+                            </Card>
+                        ) : hasVoted ? (
                             <Card className="border-2 border-primary/20 shadow-lg bg-primary/5">
                                 <CardContent className="p-8 text-center flex flex-col items-center gap-4">
                                     <div className="size-16 bg-primary/10 rounded-full flex items-center justify-center">

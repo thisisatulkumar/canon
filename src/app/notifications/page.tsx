@@ -1,9 +1,8 @@
 "use client"
 
-import { useUser } from "@clerk/nextjs";
+import { useUser, SignInButton } from "@clerk/nextjs";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 
 import Header from "@/components/Header/Header";
@@ -14,6 +13,8 @@ import {
     Bell,
     Inbox,
 } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 import { useNotifications } from "@/hooks";
 
@@ -50,6 +51,12 @@ const Page = () => {
                                     You need to be logged in to view your notifications.
                                 </p>
                             </div>
+
+                            <SignInButton mode="modal">
+                                <Button className="mt-2 w-full max-w-[200px]">
+                                    Login to View
+                                </Button>
+                            </SignInButton>
                         </CardContent>
                     </Card>
                 </main>
