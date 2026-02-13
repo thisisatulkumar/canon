@@ -1,3 +1,7 @@
+import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+
 import Header from "@/components/Header/Header";
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
 import LeaderboardRefreshCountdown from "@/components/Leaderboard/LeaderboardRefreshCountdown";
@@ -14,6 +18,15 @@ const Page = () => {
                     </div>
 
                     <div className="w-full lg:w-[30%] flex flex-col gap-4 items-center">
+                        <Link
+                            href="/arena"
+                            className="w-full"
+                        >
+                            <Button className="w-full py-7 text-xl font-black uppercase tracking-tighter bg-linear-to-r from-orange-500 via-rose-500 to-purple-600 hover:from-orange-600 hover:via-rose-600 hover:to-purple-700 text-white shadow-2xl hover:shadow-rose-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] border-none cursor-pointer">
+                                Drop your votes 🔥
+                            </Button>
+                        </Link>
+
                         <LeaderboardRefreshCountdown />
 
                         <div className="flex flex-col gap-2 items-center text-xs text-muted-foreground/60 px-1 w-full text-center">
