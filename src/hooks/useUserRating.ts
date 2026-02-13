@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getUserGlobalRating } from "@/services/leaderboard";
+import { getUserGlobalRating } from "@/services";
 
 import { getRollNumberFromEmail } from "@/utils";
 
