@@ -202,7 +202,7 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
                                                                 key={student.roll_number}
                                                                 onClick={() => toggleStudent(student)}
                                                                 className={cn(
-                                                                    "group w-auto inline-block mr-2 mb-1 sm:block relative cursor-pointer overflow-hidden rounded-md border-2 px-4 py-2 transition-all duration-300 hover:shadow-md",
+                                                                    "group w-auto inline-block mr-2 sm:mr-0 mb-1 sm:mb-0 sm:block relative cursor-pointer overflow-hidden rounded-md border-2 px-4 py-2 transition-all duration-300 hover:shadow-md",
                                                                     isSelected
                                                                         ? "border-primary bg-primary/5 shadow-inner"
                                                                         : "bg-card border-transparent hover:border-muted-foreground/20",
