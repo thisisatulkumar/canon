@@ -9,7 +9,7 @@ export const useLeaderboard = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [activeCategoryIndex, setActiveCategoryIndex] = useState(-1); // -1 for Global
-    const [sex, setSex] = useState<Sex>("m");
+    const [sex, setSex] = useState<Sex>("f");
     const [branch, setBranch] = useState<Branch | "all">("all");
 
     useEffect(() => {
