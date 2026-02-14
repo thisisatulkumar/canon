@@ -34,7 +34,22 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider appearance={{ theme: shadcn }}>
+        <ClerkProvider
+            appearance={{ theme: shadcn }}
+            localization={{
+                signIn: {
+                    start: {
+                        subtitle: "Use your college email ID",
+                    }
+                },
+                signUp: {
+                    start: {
+                        subtitle: "Use your college email ID",
+                    }
+                },
+                formFieldInputPlaceholder__emailAddress: "Use your IET Email ID"
+            }}
+        >
             <html lang="en">
                 <body>
                     <ThemeProvider
