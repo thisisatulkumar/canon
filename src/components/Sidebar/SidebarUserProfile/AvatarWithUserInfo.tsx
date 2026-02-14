@@ -39,7 +39,7 @@ const AvatarWithUserInfo = ({
 
                 {/* Rating */}
                 <span className="text-muted-foreground truncate text-xs">
-                    {isLoading ? "Loading..." : `Rating: ${rating ?? 0}`}
+                    {isLoading ? "Loading..." : `Rating: ${rating?.toFixed(0) ?? 0}`}
                 </span>
             </div>
         </>
