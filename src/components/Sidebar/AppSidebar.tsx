@@ -36,7 +36,8 @@ const whatsAppMessage =
     "👀 You might be on this list.\n\n" +
     "Anonymous college rankings just dropped.\n\n" +
     "See for yourself 👇\n" +
-    "https://thecanon.vercel.app";
+    "https://thecanon.vercel.app\n\n" + 
+    "*Sign in using your college email ID*";
 
 const links = {
     mainLinks: [
