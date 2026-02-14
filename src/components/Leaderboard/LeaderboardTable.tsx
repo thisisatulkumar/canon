@@ -52,13 +52,13 @@ const LeaderboardTable = ({
                             colSpan={3}
                             className="h-32 text-center text-muted-foreground"
                         >
-                            No data available.
+                            No votes yet.
                         </TableCell>
                     </TableRow>
                 ) : (
                     entries.map((entry) => (
-                        <TableRow 
-                            key={entry.id} 
+                        <TableRow
+                            key={entry.id}
                             className="hover:bg-muted/30 transition-colors"
                         >
                             <TableCell className="text-center">
