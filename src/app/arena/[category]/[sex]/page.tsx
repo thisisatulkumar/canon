@@ -132,7 +132,12 @@ const Page = ({ params }: { params: Promise<{ category: string; sex: string }> }
 
         const msSinceStart = now.getTime() - startOfDay.getTime();
         const intervalMs = 20 * 60 * 1000;
-        const nextIntervalMs = Math.ceil((msSinceStart + 1) / intervalMs) * intervalMs;
+        const offsetMs = 10 * 60 * 1000; // Cron runs at 10, 30, 50 mins past the hour
+
+        // Calculate next interval with the 10-minute offset
+        const adjustedMs = msSinceStart - offsetMs;
+        const nextAdjustedMs = Math.ceil((adjustedMs + 1) / intervalMs) * intervalMs;
+        const nextIntervalMs = nextAdjustedMs + offsetMs;
         const nextInterval = new Date(startOfDay.getTime() + nextIntervalMs);
 
         return nextInterval.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', hour12: true });
