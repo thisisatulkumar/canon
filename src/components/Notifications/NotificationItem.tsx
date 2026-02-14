@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 import { useIntersectionObserver } from "@/hooks";
 
-import { timeAgo } from "@/utils";
+import { timeAgo, formatNotificationMessage } from "@/utils";
 
 import { Notification } from "@/types";
 
@@ -44,7 +44,7 @@ const NotificationItem = ({
                     <div className="flex items-start justify-between gap-2">
                         <div className="flex flex-wrap items-center gap-2">
                             <span className="font-semibold leading-none">
-                                {notification.meta.message}
+                                {formatNotificationMessage(notification.meta.message)}
                             </span>
                         </div>
 
