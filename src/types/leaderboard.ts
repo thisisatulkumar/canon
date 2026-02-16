@@ -1,6 +1,6 @@
 import type { Sex } from "./sex";
 
-export type LeaderboardType = 'global' | 'category';
+export type LeaderboardType = 'global' | 'branch_global' | 'category' | 'branch_category';
 
 export interface LeaderboardEntry {
     id: number;
